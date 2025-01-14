@@ -1,43 +1,21 @@
-import {FC, useState } from 'react'
-import { GameOptionsType, GameLoadedType } from '../../types'
+import {FC } from 'react'
+import { GameOptionsType, GameStateType } from '../../types'
 
-const Questions: FC<GameLoadedType> = ({isGameLoaded, setIsGameLoaded}):JSX.Element => {
-    const [gameOptions, setGameOptions] = useState<GameOptionsType>({
-        category: "", difficulty: "", type: ""
-    });
-    const [gameDetail, setGameDetail] = useState<boolean>(false);
+const Questions: FC<GameStateType> = ({isGameLoaded, setIsGameLoaded, gameOptions, setGameOptions, handleFetchQuestions}):JSX.Element => {
+    
+    
 
 
 
 //Function (select options)
 const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const { name, value } = e.target;
-    setGameOptions((prevgameOptions) => {
+    setGameOptions((prevgameOptions: GameOptionsType) => {
         return { ...prevgameOptions, [name]:value
 }})
 }
 //Function (fetch from api)
-const handleFetchQuestions = async () => {
-    let categoryChoice = "";
-	let difficultyChoice = "";
-	let typeChoice = "";
 
-	if (gameOptions.category !== "")
-		categoryChoice = gameOptions.category;
-
-	if (gameOptions.difficulty !== "")
-		difficultyChoice = gameOptions.difficulty;
-
-	if (gameOptions.type !== "")
-		typeChoice = gameOptions.type;
-
-const response = await fetch(`https://opentdb.com/api.php?amount=5&category=${categoryChoice}&difficulty=${difficultyChoice}&type=${typeChoice}`);
-const data: {results: GameOptionsType} = await response.json();
-console.log(data.results)
-setGameDetail(!gameDetail)
-setIsGameLoaded(!isGameLoaded)
-return (data.results)
-}
 
   return (
     <>
