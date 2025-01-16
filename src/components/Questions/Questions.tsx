@@ -107,25 +107,34 @@ const QuizzicalContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  background-color: red;
+  position: relative;
+   overflow: hidden;
 `;
 const Shape1 = styled.div`
   position: absolute;
   top: 0;
-  right: 0;
+  right: 5%;
+  img {
+    width: 140%;
+  }
   `;
 const Title = styled.h1`
   font-size: 2.5rem;
-  color: #333;
+  font-family: "karla", sans-serif;
+  font-weight: 700;
+  color: #293264;
   margin-bottom: 10px;
+  padding-top:  5rem;
 `;
 
 const Description = styled.p`
+font-family: "Inter", sans-serif;
+  font-weight: 400;
   font-size: 1.2rem;
-  color: #666;
+  color: #293264;
   margin-bottom: 20px;
 `;
 
@@ -157,8 +166,11 @@ const Select = styled.select`
 `;
 const Shape2 = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: -1%;
   left: 0;
+    img {
+    width: 140%;
+  }
   `;
 // const StyledButton = styled.button`
 //   padding: 10px 20px;

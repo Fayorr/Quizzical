@@ -2,6 +2,7 @@ import Questions from './components/Questions/Questions';
 import QuestionList from './components/QuestionList/QuestionList';
 import { QuestionsType, GameOptionsType, GameLoadedType } from './types';
 import { FC, useState } from 'react';
+import GlobalStyle from './constants/globalStyles';
 
 const App: FC = (): JSX.Element => {
   const [isGameLoaded, setIsGameLoaded] = useState<GameLoadedType>(false);
@@ -31,6 +32,7 @@ const App: FC = (): JSX.Element => {
 
   return (
     <>
+      <GlobalStyle />
       {isGameLoaded ? (
         <QuestionList
           isGameLoaded={isGameLoaded}
