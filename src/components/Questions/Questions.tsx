@@ -1,6 +1,9 @@
 import { FC } from 'react';
 import { GameOptionsType, GameStateType } from '../../types';
+import StyledButton from "../../constants/Button";
 import styled from 'styled-components';
+import shape1 from "../../assets/shape-1.png"
+import shape2 from "../../assets/shape-2.png"
 
 interface QuestionsProps extends GameStateType {
   handleFetchQuestions: () => void; // Add handleFetchQuestions to the props
@@ -21,16 +24,16 @@ const Questions: FC<QuestionsProps> = ({
   };
 
   return (
-    <>
+    <QuizzicalContainer>
+      <Shape1><img src={shape1} alt='shape' /></Shape1>
+      <Title>Quizzical</Title>
+      <Description>Answer the questions and test your knowledge!</Description>
       <GameOptionsContainer>
-        <div className="select-container">
-          <label className="custom-label" htmlFor="category">
-            Category:
-          </label>
-          <select
+        <SelectContainer>
+          <Label htmlFor="category">Category:</Label>
+          <Select
             name="category"
             id="category"
-            className="custom-select"
             value={gameOptions.category}
             onChange={handleChange}
             aria-label="Select category"
@@ -60,17 +63,14 @@ const Questions: FC<QuestionsProps> = ({
             <option value="30">Science: Gadgets</option>
             <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
             <option value="32">Entertainment: Cartoon &amp; Animations</option>
-          </select>
-        </div>
+          </Select>
+        </SelectContainer>
 
-        <div className="select-container">
-          <label className="custom-label" htmlFor="difficulty">
-            Difficulty:
-          </label>
-          <select
+        <SelectContainer>
+          <Label htmlFor="difficulty">Difficulty:</Label>
+          <Select
             name="difficulty"
             id="difficulty"
-            className="custom-select"
             value={gameOptions.difficulty}
             onChange={handleChange}
             aria-label="Select difficulty"
@@ -79,17 +79,14 @@ const Questions: FC<QuestionsProps> = ({
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
-          </select>
-        </div>
+          </Select>
+        </SelectContainer>
 
-        <div className="select-container">
-          <label className="custom-label" htmlFor="type">
-            Type of questions:
-          </label>
-          <select
+        <SelectContainer>
+          <Label htmlFor="type">Type of questions:</Label>
+          <Select
             name="type"
             id="type"
-            className="custom-select"
             value={gameOptions.type}
             onChange={handleChange}
             aria-label="Select type of questions"
@@ -97,17 +94,85 @@ const Questions: FC<QuestionsProps> = ({
             <option value="">Any Type</option>
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True / False</option>
-          </select>
-        </div>
+          </Select>
+        </SelectContainer>
       </GameOptionsContainer>
-      <button type="submit" onClick={handleFetchQuestions}>
-        Start Quiz
-      </button>
-    </>
+      <StyledButton onClick={handleFetchQuestions}>Start Quiz</StyledButton>
+      <Shape2><img src={shape2} alt='shape' /></Shape2>
+    </QuizzicalContainer>
   );
 };
 
+const QuizzicalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+const Shape1 = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  `;
+const Title = styled.h1`
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+`;
+
+const Description = styled.p`
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 20px;
+`;
+
 const GameOptionsContainer = styled.div`
-	background-color: white;
-`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+`;
+
+const SelectContainer = styled.div`
+  margin-bottom: 15px;
+`;
+
+const Label = styled.label`
+  display: block;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
+`;
+
+const Select = styled.select`
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+const Shape2 = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  `;
+// const StyledButton = styled.button`
+//   padding: 10px 20px;
+//   font-size: 1rem;
+//   color: #fff;
+//   background-color: #007bff;
+//   border: none;
+//   border-radius: 5px;
+//   cursor: pointer;
+//   transition: background-color 0.3s;
+
+//   &:hover {
+//     background-color: #0056b3;
+//   }
+// `;
+
 export default Questions;
