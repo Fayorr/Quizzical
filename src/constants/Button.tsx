@@ -6,13 +6,13 @@ const StyledButton = styled.button`
     color: #F5F7FB;
     border: none;
     border-radius: 15px;
-    padding: 10px 20px;
+    padding: 1rem 3.4rem;
     cursor: pointer;
     font-size: 16px;
-/* box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color]; */
+    font-weight: 400;
+    font-family: "Karla", sans-serif;
     &:hover {
-        background-color: darkviolet;
-        box-shadow: 0 4 4px 25% #000;        
+        box-shadow: 0 4 14px 0 #000;        
     }
 `;
 

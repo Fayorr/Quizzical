@@ -120,6 +120,12 @@ const Shape1 = styled.div`
   img {
     width: 140%;
   }
+    @media screen and (max-width: 768px) {
+      right: 0;
+    img{
+      width: 100%;
+    
+    }}
   `;
 const Title = styled.h1`
   font-size: 2.5rem;
@@ -170,6 +176,11 @@ const Shape2 = styled.div`
   left: 0;
     img {
     width: 140%;
+  }
+  @media screen and (max-width: 768px) {
+    img{
+      width: 100%;
+    }
   }
   `;
 // const StyledButton = styled.button`
