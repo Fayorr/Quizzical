@@ -29,7 +29,6 @@ const App: FC = (): JSX.Element => {
     setQuestionsData(data.results);
   };
 
-  
   return (
     <>
       {isGameLoaded ? (
