@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { QuestionsType } from "../../types";
 import tick from "../../assets/tick.svg";
 import cross from "../../assets/cross.svg";
+import shape1 from "../../assets/shape-1.png"
 import styled from "styled-components";
 
 interface QuestionListProps {
@@ -67,12 +68,16 @@ const QuestionList = ({
 
   return (
     <>
+      <Shape1><img src={shape1} alt='shape' /></Shape1>
+      <QuestionListContainer>
+
+      
       {questionsData.map((question, index) => {
         const options = shuffledOptions[index] || []; // Use pre-shuffled options
 
         return (
           <div key={index}>
-            <h3>{question.question}</h3>
+            <Question>{question.question}</Question>
             {options.map((option, optionIndex) => {
               const isSelected = selectedAnswers[index] === option;
               const isCorrect = option === question.correct_answer;
@@ -88,7 +93,7 @@ const QuestionList = ({
               }
 
               return (
-                <button
+                <OptionButton
                   key={optionIndex}
                   onClick={() => handleCheckCorrectAnswer(option, question.correct_answer, index)}
                   disabled={selectedAnswers[index] !== undefined} // Disable after selection
@@ -98,7 +103,7 @@ const QuestionList = ({
                   }}
                 >
                   {option}
-                </button>
+                </OptionButton>
               );
             })}
             {showAnswers && (
@@ -110,194 +115,58 @@ const QuestionList = ({
           </div>
         );
       })}
-      {showAnswers && <h2>{`You got ${correctOptionsList.length}/${questionsData.length} correct`}</h2>}
-      <button onClick={handleShowAnswers}>Check Answers</button>
-      <button onClick={handleResetQuiz}>Reset Quiz</button>
+      </QuestionListContainer>
+
+      <Footer>
+      {showAnswers && <h2>{`You got ${correctOptionsList.length}/${questionsData.length} correct`}</h2>}  
+      {showAnswers ? <button onClick={handleResetQuiz}>Play again</button> : <button onClick={handleShowAnswers}>Check Answers</button>}
+      </Footer>
     </>
   );
 };
 
+const Shape1 = styled.div`
+  position: absolute;
+  top: 0;
+  right: 5%;
+  img {
+    width: 140%;
+  }
+    @media screen and (max-width: 768px) {
+      right: 0;
+    img{
+      width: 100%;
+    
+    }}
+  `;
+
+  const QuestionListContainer = styled.div`
+ display: flex;
+ flex-direction: column;
+  margin: 0 auto;
+  padding: 2.5rem 5rem;
+  background-color: red;
+  `;
+const Question = styled.h3`
+  font-size: 1.2rem;
+  font-family: "Karla", sans-serif;
+  color: #293264;
+  `;
+const OptionButton = styled.button`
+border: none;
+border-radius: 15px;
+padding: .5rem 1rem;
+color: #293264;
+
+`;
 const Image = styled.img`
   width: 4%;
 `;
 
+const Footer = styled.div`
+  display: flex;
+  justify-content: center;
+  /* margin-top: 2rem;  */
+`;
+
 export default QuestionList;
-
-// const Image = styled.img`
-//   width: 4%;
-// `
-// Take 2
-// import { QuestionsType } from "../../types";
-// import { useState, useEffect } from "react";
-
-// interface QuestionListProps {
-//   questionsData: QuestionsType[];
-// }
-
-// const QuestionList = ({ questionsData }: QuestionListProps): JSX.Element => {
-//   //States
-//   const [correctOptionsList, setCorrectOptionsList] = useState<string[]>([]);
-//   const [wrongOptionsList, setWrongOptionsList] = useState<string[]>([]);
-//   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
-//   const [shuffledOptions, setShuffledOptions] = useState<string[][]>([]); //state for controlling fetched data after mount
-//   const [showAnswers, setShowAnswers] = useState<boolean>(false); // State to control answer highlighting
-
-//   // Shuffle options when  component mounts
-//   useEffect(() => {
-//     const shuffled = questionsData.map((question) => {
-//       const options = [...question.incorrect_answers];
-//       const randomIndex = Math.floor(Math.random() * (options.length + 1));
-//       options.splice(randomIndex, 0, question.correct_answer);
-//       return options;
-//     });
-//     setShuffledOptions(shuffled);
-//   }, [questionsData]);
-
-//   // Function to handle correct/wrong answers
-//   const handleCheckCorrectAnswer = (selectedOption: string, correctOption: string, questionIndex: number) => {
-//     // Update the selected answers state
-//     setSelectedAnswers((prevSelectedAnswers) => ({
-//       ...prevSelectedAnswers,
-//       [questionIndex]: selectedOption,
-//     }));
-
-//     if (selectedOption === correctOption) {
-//       // Add the correct option to the correctOptionsList
-//       setCorrectOptionsList((prevCorrectOptionsList) => [
-//         ...prevCorrectOptionsList,
-//         correctOption,
-//       ]);
-//     } else {
-//       // Add the selected option to the wrongOptionsList
-//       setWrongOptionsList((prevWrongOptionsList) => [
-//         ...prevWrongOptionsList,
-//         selectedOption,
-//       ]);
-//     }
-//   };
-
-//   // Function to show the final score and highlight answers
-//   const handleShowAnswers = () => {
-//     setShowAnswers(true); // Enable answer highlighting
-
-//     console.log(`You got ${correctOptionsList.length}/${questionsData.length} correct`);
-//     console.log("Correct answers:", correctOptionsList);
-//     console.log("Wrong answers:", wrongOptionsList);
-//   };
-
-//   // Function to reset the quiz
-//   const handleResetQuiz = () => {
-//     setCorrectOptionsList([]);
-//     setWrongOptionsList([]);
-//     setSelectedAnswers({});
-//     setShowAnswers(false); // Disable answer highlighting
-//   };
-
-//   return (
-//     <>
-//       {questionsData.map((question, index) => {
-//         const options = shuffledOptions[index] || []; // Use pre-shuffled options
-
-//         return (
-//           <div key={index}>
-//             <h3>{question.question}</h3>
-//             {options.map((option, optionIndex) => {
-//               const isSelected = selectedAnswers[index] === option;
-//               const isCorrect = option === question.correct_answer;
-
-//               // Apply highlighting only if showAnswers is true
-//               const backgroundColor = showAnswers
-//                 ? isSelected
-//                   ? isCorrect
-//                     ? "green" // Highlight correct answer in green
-//                     : "red" // Highlight wrong answer in red
-//                   : "white"
-//                 : "white";
-              
-//               return (
-//                 <button
-//                   key={optionIndex}
-//                   onClick={() => handleCheckCorrectAnswer(option, question.correct_answer, index)}
-//                   disabled={selectedAnswers[index] !== undefined} // Disable after selection
-//                   style={{
-//                     backgroundColor,
-//                     color: isSelected ? "white" : "black",
-//                   }}
-//                 >
-//                   {option}
-//                 </button>
-//               );
-//             })}
-//           </div>
-//         );
-//       })}
-//       <button onClick={handleShowAnswers} disabled={Object.keys(selectedAnswers).length !== shuffledOptions.length}>Check Answers</button>
-//       <button onClick={handleResetQuiz}>Reset Quiz</button>
-//     </>
-//   );
-// };
-
-// export default QuestionList;
-// import { QuestionsType } from "../../types";
-// import { useState } from "react";
-
-// interface QuestionListProps {
-//   questionsData: QuestionsType[];
-// }
-
-// const QuestionList = ({ questionsData }: QuestionListProps): JSX.Element => {
-//   const [correctOptionsList, setCorrectOptionsList] = useState<string[]>([]);
-//   const [wrongOptionsList, setWrongOptionsList] = useState<string[]>([]);
-
-//   // Function to handle correct/wrong answers
-//   const handleCheckCorrectAnswer = (selectedOption: string, correctOption: string) => {
-//     if (selectedOption === correctOption) {
-//       // Add the correct option to the correctOptionsList
-//       setCorrectOptionsList((prevCorrectOptionsList) => [
-//         ...prevCorrectOptionsList,
-//         correctOption,
-//       ]);
-//     } else {
-//       // Add the selected option to the wrongOptionsList
-//       setWrongOptionsList((prevWrongOptionsList) => [
-//         ...prevWrongOptionsList,
-//         selectedOption,
-//       ]);
-//     }
-//   };
-
-//   // Function to show the final score
-//   const handleShowAnswers = () => {
-//     console.log(`You got ${correctOptionsList.length}/${questionsData.length} correct`);
-//     console.log("Correct answers:", correctOptionsList);
-//     console.log("Wrong answers:", wrongOptionsList);
-//   };
-
-//   return (
-//     <>
-//       {questionsData.map((question, index) => {
-//         // Combine incorrect answers and correct answer into one array
-//         const options = [...question.incorrect_answers];
-//         const randomIndex = Math.floor(Math.random() * (options.length + 1));
-//         options.splice(randomIndex, 0, question.correct_answer);
-
-//         return (
-//           <div key={index}>
-//             <h3>{question.question}</h3>
-//             {options.map((option, optionIndex) => (
-//               <button
-//                 key={optionIndex}
-//                 onClick={() => handleCheckCorrectAnswer(option, question.correct_answer)}
-//               >
-//                 {option}
-//               </button>
-//             ))}
-//           </div>
-//         );
-//       })}
-//       <button onClick={handleShowAnswers}>Check Answers</button>
-//     </>
-//   );
-// };
-
-// export default QuestionList;

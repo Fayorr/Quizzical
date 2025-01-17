@@ -112,7 +112,7 @@ const QuizzicalContainer = styled.div`
   position: relative;
    overflow: hidden;
 `;
-const Shape1 = styled.div`
+ const Shape1 = styled.div`
   position: absolute;
   top: 0;
   right: 5%;
