@@ -179,8 +179,7 @@ const Select = styled.select`
   max-width: 385px;
 @media screen and (max-width: 768px) {
      max-width: 300px;
-    }}
-
+    }
 `;
 
 const Shape2 = styled.div`
