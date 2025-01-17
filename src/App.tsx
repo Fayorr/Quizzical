@@ -44,6 +44,8 @@ const App: FC = (): JSX.Element => {
           handleFetchQuestions={handleFetchQuestions}
           gameOptions={gameOptions}
           setGameOptions={setGameOptions}
+          isGameLoaded={isGameLoaded}
+          setIsGameLoaded={setIsGameLoaded}
         />
       )}
     </>
