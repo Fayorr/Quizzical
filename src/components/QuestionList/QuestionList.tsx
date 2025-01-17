@@ -110,6 +110,7 @@ const QuestionList = ({
           </div>
         );
       })}
+      {showAnswers && <h2>{`You got ${correctOptionsList.length}/${questionsData.length} correct`}</h2>}
       <button onClick={handleShowAnswers}>Check Answers</button>
       <button onClick={handleResetQuiz}>Reset Quiz</button>
     </>
