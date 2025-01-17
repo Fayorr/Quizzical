@@ -1,11 +1,11 @@
 import Questions from './components/Questions/Questions';
 import QuestionList from './components/QuestionList/QuestionList';
-import { QuestionsType, GameOptionsType, GameLoadedType } from './types';
+import { QuestionsType, GameOptionsType  } from './types';
 import { FC, useState } from 'react';
 import GlobalStyle from './constants/globalStyles';
 
 const App: FC = (): JSX.Element => {
-  const [isGameLoaded, setIsGameLoaded] = useState<GameLoadedType>(false);
+ const [isGameLoaded, setIsGameLoaded] = useState<boolean>(false);
   const [questionsData, setQuestionsData] = useState<QuestionsType[]>([]);
   const [gameOptions, setGameOptions] = useState<GameOptionsType>({
     category: '',
