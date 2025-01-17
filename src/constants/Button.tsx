@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<ButtonProps>`
     background-color:#293264;;
     color: #F5F7FB;
     border: none;
@@ -14,11 +14,13 @@ const StyledButton = styled.button`
     &:hover {
         box-shadow: 0 4 14px 0 #000;        
     }
+    
 `;
 
 interface ButtonProps {
     onClick: () => void;
     children: React.ReactNode;
+    disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({ onClick, children }) => {
