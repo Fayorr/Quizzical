@@ -109,7 +109,6 @@ const QuizzicalContainer = styled.div`
   align-items: center;
   height: 100vh;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-  background-color: red;
   position: relative;
    overflow: hidden;
 `;
@@ -147,29 +146,43 @@ font-family: "Inter", sans-serif;
 const GameOptionsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px;
+  width: 75%;
+  max-width: 550px;
   margin-bottom: 20px;
 `;
 
 const SelectContainer = styled.div`
   margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+
 `;
 
 const Label = styled.label`
   display: block;
   font-size: 1rem;
-  color: #333;
+  font-weight: 600;
+  font-family: "Karla", sans-serif; 
+   color: #293264;
+  /* margin-right: 1rem; */
   margin-bottom: 5px;
 `;
 
 const Select = styled.select`
   width: 100%;
   padding: 10px;
-  font-size: 1rem;
+    font-size: .9rem;
+    color: #293624;
   border: 1px solid #ccc;
   border-radius: 5px;
+  max-width: 385px;
+@media screen and (max-width: 768px) {
+     max-width: 300px;
+    }}
+
 `;
+
 const Shape2 = styled.div`
   position: absolute;
   bottom: -1%;
