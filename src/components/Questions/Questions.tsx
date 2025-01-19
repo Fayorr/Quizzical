@@ -104,10 +104,14 @@ const Questions: FC<QuestionsProps> = ({
 };
 
 const QuizzicalContainer = styled.div`
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   height: 100vh;
+  /* background-color: red; */
+  /* padding-top: 4rem; */
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   position: relative;
    overflow: hidden;

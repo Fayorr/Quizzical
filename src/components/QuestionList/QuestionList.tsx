@@ -245,6 +245,11 @@ cursor: pointer;
 `;
 const Image = styled.img`
   width: 4%;
+    @media only screen and (max-width: 600px) {
+    width: 12%;
+    padding: 0;
+
+  }
 `;
 
 const Footer = styled.div`
