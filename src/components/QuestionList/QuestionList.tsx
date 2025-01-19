@@ -263,7 +263,7 @@ const Footer = styled.div`
   @media only screen and (max-width: 600px) {
     /* background-color: red; */
     padding: 0;
-    margin-top: -10rem;
+    /* margin-top: -10rem; */
     /* padding-bottom: 0; */
   }
 `;
