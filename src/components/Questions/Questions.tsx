@@ -111,6 +111,10 @@ const QuizzicalContainer = styled.div`
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   position: relative;
    overflow: hidden;
+   @media only screen and (max-width: 600px) {
+    justify-content: center;
+    padding-top: -4rem;
+  }
 `;
  const Shape1 = styled.div`
   position: absolute;
@@ -132,7 +136,6 @@ const Title = styled.h1`
   font-weight: 700;
   color: #293264;
   margin-bottom: 10px;
-  padding-top:  5rem;
 `;
 
 const Description = styled.p`
@@ -141,6 +144,11 @@ font-family: "Inter", sans-serif;
   font-size: 1.2rem;
   color: #293264;
   margin-bottom: 20px;
+  @media only screen and (max-width: 600px) {
+    text-align: center;
+    padding: 0 1rem;
+  }
+
 `;
 
 const GameOptionsContainer = styled.div`
