@@ -4,6 +4,23 @@ import { QuestionsType, GameOptionsType  } from './types';
 import { FC, useState } from 'react';
 import GlobalStyle from './constants/globalStyles';
 
+
+// Decode the API data
+const decodeHtmlEntities = (text: string): string => {
+  const textArea = document.createElement('textarea');
+  textArea.innerHTML = text;
+  return textArea.value;
+};
+
+const decodeApiData = (data: QuestionsType[]): QuestionsType[] => {
+  return data.map((item) => ({
+    ...item,
+    question: decodeHtmlEntities(item.question),
+    correct_answer: decodeHtmlEntities(item.correct_answer),
+    incorrect_answers: item.incorrect_answers.map(decodeHtmlEntities),
+  }));
+};
+
 const App: FC = (): JSX.Element => {
  const [isGameLoaded, setIsGameLoaded] = useState<boolean>(false);
   const [questionsData, setQuestionsData] = useState<QuestionsType[]>([]);
@@ -26,8 +43,9 @@ const App: FC = (): JSX.Element => {
       `https://opentdb.com/api.php?amount=5&category=${categoryChoice}&difficulty=${difficultyChoice}&type=${typeChoice}`
     );
     const data: { results: QuestionsType[] } = await response.json();
+    const decodedData = decodeApiData(data.results);
     setIsGameLoaded(!isGameLoaded); // Set isGameLoaded to true
-    setQuestionsData(data.results);
+    setQuestionsData(decodedData);
   };
 
   return (
