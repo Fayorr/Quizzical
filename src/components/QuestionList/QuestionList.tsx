@@ -186,6 +186,7 @@ const Question = styled.h3`
   font-family: "Karla", sans-serif;
   color: #293264;
   `;
+  
 const OptionsContainer = styled.div`
 display: flex;
 justify-content: flex-start;
