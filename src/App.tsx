@@ -1,28 +1,22 @@
 import Questions from './components/Questions/Questions';
 import QuestionList from './components/QuestionList/QuestionList';
-import { QuestionsType, GameOptionsType  } from './types';
+import { QuestionsType, GameOptionsType } from './types';
 import { FC, useState } from 'react';
 import GlobalStyle from './constants/globalStyles';
+import he from 'he'; // Import the he library
 
-
-// Decode the API data
-const decodeHtmlEntities = (text: string): string => {
-  const textArea = document.createElement('textarea');
-  textArea.innerHTML = text;
-  return textArea.value;
-};
-
+// Decode the API data using he library
 const decodeApiData = (data: QuestionsType[]): QuestionsType[] => {
   return data.map((item) => ({
     ...item,
-    question: decodeHtmlEntities(item.question),
-    correct_answer: decodeHtmlEntities(item.correct_answer),
-    incorrect_answers: item.incorrect_answers.map(decodeHtmlEntities),
+    question: he.decode(item.question),
+    correct_answer: he.decode(item.correct_answer),
+    incorrect_answers: item.incorrect_answers.map((answer) => he.decode(answer)),
   }));
 };
 
 const App: FC = (): JSX.Element => {
- const [isGameLoaded, setIsGameLoaded] = useState<boolean>(false);
+  const [isGameLoaded, setIsGameLoaded] = useState<boolean>(false);
   const [questionsData, setQuestionsData] = useState<QuestionsType[]>([]);
   const [gameOptions, setGameOptions] = useState<GameOptionsType>({
     category: '',
@@ -31,21 +25,24 @@ const App: FC = (): JSX.Element => {
   });
 
   const handleFetchQuestions = async (): Promise<void> => {
-    let categoryChoice = '';
-    let difficultyChoice = '';
-    let typeChoice = '';
+    const { category, difficulty, type } = gameOptions;
 
-    if (gameOptions.category !== '') categoryChoice = gameOptions.category;
-    if (gameOptions.difficulty !== '') difficultyChoice = gameOptions.difficulty;
-    if (gameOptions.type !== '') typeChoice = gameOptions.type;
+    try {
+      const response = await fetch(
+        `https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=${type}`
+      );
 
-    const response = await fetch(
-      `https://opentdb.com/api.php?amount=5&category=${categoryChoice}&difficulty=${difficultyChoice}&type=${typeChoice}`
-    );
-    const data: { results: QuestionsType[] } = await response.json();
-    const decodedData = decodeApiData(data.results);
-    setIsGameLoaded(!isGameLoaded); // Set isGameLoaded to true
-    setQuestionsData(decodedData);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data: { results: QuestionsType[] } = await response.json();
+      const decodedData = decodeApiData(data.results);
+      setIsGameLoaded(true); // Set isGameLoaded to true
+      setQuestionsData(decodedData);
+    } catch (error) {
+      console.error('Error fetching questions:', error);
+    }
   };
 
   return (
