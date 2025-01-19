@@ -113,7 +113,7 @@ const QuizzicalContainer = styled.div`
    overflow: hidden;
    @media only screen and (max-width: 600px) {
     justify-content: center;
-    padding-top: -4rem;
+    padding-top: -6rem;
   }
 `;
  const Shape1 = styled.div`
