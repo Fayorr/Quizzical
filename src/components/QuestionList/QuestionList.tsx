@@ -68,9 +68,9 @@ const QuestionList = ({
   };
 
   return (
-    <>
-      <Shape1><img src={shape1} alt='shape' /></Shape1>
+    <Container>
       <QuestionListContainer>
+      <Shape1><img src={shape1} alt='shape' /></Shape1>
       {questionsData.map((question, index) => {
         const options = shuffledOptions[index] || []; // Use pre-shuffled options
 
@@ -126,16 +126,20 @@ const QuestionList = ({
         );
       })}
       </QuestionListContainer>
-
       <Footer>
       {showAnswers && <h2>{`You got ${correctOptionsList.length}/${questionsData.length} correct`}</h2>}  
       
       {showAnswers ? <StyledButton onClick={handleResetQuiz}>Play again</StyledButton> : <Button disabled={Object.keys(selectedAnswers).length != shuffledOptions.length}  onClick={handleShowAnswers}>Check Answers</Button>}
       <Shape2><img src={shape2} alt='shape' /></Shape2>
       </Footer>
-    </>
+
+    </Container>
   );
 };
+const Container = styled.div`
+height: 100vh;
+/* background-color: yellow; */
+`;
 const Button = styled.button<{ disabled: boolean }>`
   background-color:#293264;;
     color: #F5F7FB;
@@ -147,6 +151,9 @@ const Button = styled.button<{ disabled: boolean }>`
   border: none;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  /* @media only screen and (max-width: 600px) {
+    margin-top: 2rem;
+  } */
 `;
 
 const Shape1 = styled.div`
@@ -171,22 +178,37 @@ const MainContainer = styled.div`
 display: flex;
 justify-content: space-between;
 width: 90%;
+/* height: 100vh; */
+
 `;
   const QuestionListContainer = styled.div`
  display: flex;
  flex-direction: column;
   margin: 0 auto;
   padding: 2rem 7rem 0;
+  position: relative;
   @media screen  and (max-width: 768px) {
     padding: 2.5rem 2.5rem;
+    
+  }
+  @media only screen and (max-width: 600px) {
+    height: 90vh;
+      padding-bottom: 0;
+      padding: 2.5rem 2.5rem 0;
   }
   `;
 const Question = styled.h3`
   font-size: 1.2rem;
   font-family: "Karla", sans-serif;
   color: #293264;
+  @media only screen and (max-width: 600px) {
+    padding: 1rem 0;
+    margin: 0;
+    font-size: 1rem;
+    /* padding-bottom: 0; */
+  }
   `;
-  
+
 const OptionsContainer = styled.div`
 display: flex;
 justify-content: flex-start;
@@ -200,6 +222,11 @@ max-width: 100%;
   @media screen and (max-width: 768px) {
     gap: .2rem;
     max-width: 100%;
+  }
+  @media only screen and (max-width: 600px) {
+     margin-top: 0rem;
+     /* background-color: yellow; */
+     padding-bottom: 0;
   }
 `;
 const OptionButton = styled.button`
@@ -233,6 +260,12 @@ const Footer = styled.div`
     font-family: "Karla", sans-serif;
     color: #293264;
   }
+  @media only screen and (max-width: 600px) {
+    /* background-color: red; */
+    padding: 0;
+    margin-top: -10rem;
+    /* padding-bottom: 0; */
+  }
 `;
 const Shape2 = styled.div`
   position: absolute;
@@ -248,6 +281,14 @@ const Shape2 = styled.div`
       width:50%;
     }
   }
+  /* @media only screen and (max-width: 600px) {
+    padding-left: -10rem;
+    position: absolute;
+   bottom: 0%;
+   left: -10;
+
+  } */
+
   `;
 
 export default QuestionList;
