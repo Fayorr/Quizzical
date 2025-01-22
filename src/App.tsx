@@ -45,6 +45,7 @@ const App: FC = (): JSX.Element => {
     }
   };
 
+
   return (
     <>
       <GlobalStyle />
