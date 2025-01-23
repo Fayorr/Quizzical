@@ -293,6 +293,7 @@ const Shape2 = styled.div`
     position: absolute;
     bottom: 0%;
     img{
+      display: none;
       width:60%;
     }
   }
