@@ -130,30 +130,22 @@ const QuestionList = ({
       {showAnswers && <h2>{`You got ${correctOptionsList.length}/${questionsData.length} correct`}</h2>}  
       
       {showAnswers ? <StyledButton onClick={handleResetQuiz}>Play again</StyledButton> : <Button disabled={Object.keys(selectedAnswers).length != shuffledOptions.length}  onClick={handleShowAnswers}>Check Answers</Button>}
-      <Shape2><img src={shape2} alt='shape' /></Shape2>
       </Footer>
+      <Shape2><img src={shape2} alt='shape' /></Shape2>
 
     </Container>
   );
 };
 const Container = styled.div`
 height: 100vh;
+position: relative;
 /* background-color: yellow; */
-`;
-const Button = styled.button<{ disabled: boolean }>`
-  background-color:#293264;;
-    color: #F5F7FB;
-  border-radius: 15px;
-    padding: 1rem 3.4rem;
-  font-size: 16px;
-    font-weight: 400;
-    font-family: "Karla", sans-serif;
-  border: none;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  /* @media only screen and (max-width: 600px) {
-    margin-top: 2rem;
-  } */
+  @media only screen and (max-width: 600px) {
+    height: 100vh;
+      padding-bottom: 0;
+      padding:  0;
+      /* background-color: rebeccapurple; */
+  }
 `;
 
 const Shape1 = styled.div`
@@ -181,20 +173,21 @@ width: 90%;
 /* height: 100vh; */
 
 `;
-  const QuestionListContainer = styled.div`
+const QuestionListContainer = styled.div`
  display: flex;
  flex-direction: column;
-  margin: 0 auto;
-  padding: 2rem 7rem 0;
-  position: relative;
-  @media screen  and (max-width: 768px) {
-    padding: 2.5rem 2.5rem;
-    
+ margin: 0 auto;
+ padding: 2rem 7rem 0;
+ position: relative;
+ @media screen  and (max-width: 768px) {
+   padding: 2.5rem 2.5rem ;
+   
   }
   @media only screen and (max-width: 600px) {
-    height: 90vh;
-      padding-bottom: 0;
-      padding: 2.5rem 2.5rem 0;
+    /* height: 90vh; */
+    padding: 2.5rem 2.5rem 0;
+    /* background-color: yellow; */
+    padding-bottom: 0;
   }
   `;
 const Question = styled.h3`
@@ -217,16 +210,16 @@ flex-wrap: wrap;
 gap: .5rem;
 padding-bottom: 10px;
 border-bottom: 1px solid #DBDEF0;
-  margin-top: 1rem;
+margin-top: 1rem;
 max-width: 100%;
-  @media screen and (max-width: 768px) {
-    gap: .2rem;
+@media screen and (max-width: 768px) {
+  gap: .2rem;
     max-width: 100%;
   }
   @media only screen and (max-width: 600px) {
-     margin-top: 0rem;
-     /* background-color: yellow; */
-     padding-bottom: 0;
+    margin-top: 0rem;
+    /* background-color: yellow; */
+    padding-bottom: 0;
   }
 `;
 const OptionButton = styled.button`
@@ -245,10 +238,10 @@ cursor: pointer;
 `;
 const Image = styled.img`
   width: 4%;
-    @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 600px) {
     width: 12%;
     padding: 0;
-
+    
   }
 `;
 
@@ -257,8 +250,7 @@ const Footer = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  position: relative;
-  padding-top: 1rem;
+  /* position: relative; */
   height: 3rem;
   h2 {
     font-size: 1.2rem;
@@ -266,24 +258,42 @@ const Footer = styled.div`
     color: #293264;
   }
   @media only screen and (max-width: 600px) {
+    position: relative;
+      /* position: absolute; */
     /* background-color: red; */
-    padding: 0;
-    /* margin-top: -10rem; */
-    /* padding-bottom: 0; */
+    /* margin-top: -4rem; */
+    height: 9vh;
   }
-`;
+  `;
+
+  const Button = styled.button<{ disabled: boolean }>`
+    background-color:#293264;;
+      color: #F5F7FB;
+    border-radius: 15px;
+      padding: 1rem 3.4rem;
+    font-size: 16px;
+      font-weight: 400;
+      font-family: "Karla", sans-serif;
+    border: none;
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+    opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  
+    @media only screen and (max-width: 600px) {
+      /* bottom: 0; */
+    }
+  `;
 const Shape2 = styled.div`
   position: absolute;
-  bottom: -10%;
+  bottom: 0%;
   left: 0;
     img {
     width: 60%;
   }
   @media screen and (max-width: 768px) {
     position: absolute;
-    bottom: -20%;
+    bottom: 0%;
     img{
-      width:50%;
+      width:60%;
     }
   }
   /* @media only screen and (max-width: 600px) {
