@@ -256,12 +256,19 @@ const Footer = styled.div`
     font-size: 1.2rem;
     font-family: "Karla", sans-serif;
     color: #293264;
+    @media only screen and (max-width: 600px) {
+      font-size: 1rem;
+      
+    }
   }
   @media only screen and (max-width: 600px) {
     position: relative;
+    /* width: 90%; */
+    gap: 0.5rem;
       /* position: absolute; */
     /* background-color: red; */
-    /* margin-top: -4rem; */
+    padding: 0 2rem;
+    margin-top: 0.5rem;
     height: 9vh;
   }
   `;

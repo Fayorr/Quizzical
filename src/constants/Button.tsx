@@ -14,6 +14,10 @@ const StyledButton = styled.button<ButtonProps>`
     &:hover {
         box-shadow: 0 4 14px 0 #000;        
     }
+      @media only screen and (max-width: 600px) {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
     
 `;
 
